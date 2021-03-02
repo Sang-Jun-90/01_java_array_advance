@@ -84,7 +84,7 @@ public class ArrayEx30_정답 {
 				System.out.print("비밀번호 : ");
 				int pw = scan.nextInt();
 				
-				if (arPw[identifier] == pw ||) {
+				if (arPw[identifier] == pw ) {
 					arId[identifier] = 0;
 					arPw[identifier] = 0;
 					loginCheck = false;
