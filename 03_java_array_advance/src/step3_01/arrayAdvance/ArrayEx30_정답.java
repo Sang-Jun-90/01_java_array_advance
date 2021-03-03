@@ -77,19 +77,27 @@ public class ArrayEx30_정답 {
 				arId[usrCnt] = id;
 				arPw[usrCnt] = pw;
 				arMoney[usrCnt] = 1000;
+				loginCheck = true;
 				
 			}
 			// 탈퇴
 			else if(sel == 2) {
+				if (identifier == -1) {
+					System.out.println("로그인이 되어있지 않아요.");
+					continue;
+				}
+				
 				System.out.print("비밀번호 : ");
 				int pw = scan.nextInt();
 				
-				if (arPw[identifier] == pw ) {
+				if (arPw[identifier] == pw) {
 					arId[identifier] = 0;
 					arPw[identifier] = 0;
 					loginCheck = false;
 					identifier = -1;
+					System.out.println("탈퇴되었습니.");
 				}
+				else System.out.println("비번이 틀렸어요.");
 				
 			}
 			// 로그인
@@ -119,10 +127,66 @@ public class ArrayEx30_정답 {
 				}
 				
 			}
-			else if(sel == 4) {}
-			else if(sel == 5) {}
-			else if(sel == 6) {}
-			else if(sel == 7) {}
+			// 로그아웃 
+			else if(sel == 4) {
+				if (identifier == -1) {
+					System.out.println("로그인이 되어있지 않아요.");
+					continue;
+				}
+				else identifier = -1;
+			}
+			
+			// 입금 
+			else if(sel == 5) {
+				if (identifier == -1) {
+					System.out.println("로그인이 되어있지 않아요.");
+					continue;
+				}
+				else {
+					System.out.print("입금할 금액 : ");
+					int inputMoney = scan.nextInt();
+					arMoney[identifier] += inputMoney;
+				}
+				
+			}
+			
+			// 이체 
+			else if(sel == 6) {
+				if (identifier == -1) {
+					System.out.println("로그인이 되어있지 않아요.");
+					continue;
+				}
+				else {
+					int passId = 0;
+					System.out.print("이체할 아이디 : ");
+					int inputId = scan.nextInt();
+					if (inputId == arId[identifier]) {
+						continue;
+					}
+					for (int i = 0 ; i < arId.length ; i++) {
+						if (inputId == arId[i]) passId = i;
+					}
+					System.out.print("이체할 금액 : ");
+					int passMoney = scan.nextInt();
+				    if (passMoney > arMoney[identifier]) {
+						System.out.println("잔액이 부족합니다.");
+						continue;
+				    }
+				    else arMoney[passId] += passMoney;
+				}
+				
+				
+			}
+			
+			// 잔액조
+			else if(sel == 7) {
+				if (identifier == -1) {
+					System.out.println("로그인이 되어있지 않아요.");
+					continue;
+				}
+				else 					System.out.println("잔액 : "+ arMoney[identifier]);
+				
+			}
 			else if(sel == 0) {
 				break;
 			}

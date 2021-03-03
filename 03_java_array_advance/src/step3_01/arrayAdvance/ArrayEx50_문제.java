@@ -23,7 +23,7 @@ public class ArrayEx50_문제 {
 
 	public static void main(String[] args) {
 
-		
+		int[][] map = new int[5][5]; 
 		
 	}
 
