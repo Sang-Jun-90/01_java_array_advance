@@ -49,6 +49,9 @@ public class ArrayEx43_연습 {
 			int rX = ran.nextInt(SIZE-2)+1;
 			if (map[rY][rX] == 0) {
 				map[rY][rX] = BALL;
+				ballY = rY;
+				ballX = rX;
+
 				break;
 			}
 		}
@@ -59,6 +62,8 @@ public class ArrayEx43_연습 {
 			int rX = ran.nextInt(SIZE-2)+1;
 			if (map[rY][rX] == 0) {
 				map[rY][rX] = GOAL;
+				goalY = rY;
+				goalX = rX;
 				break;
 			}
 		}
@@ -84,15 +89,58 @@ public class ArrayEx43_연습 {
 			System.out.println("==================");
 			for (int i = 0; i < SIZE; i++) {
 				for (int j = 0; j < SIZE; j++) {
-					if (map[i][j] == PLAYER) System.out.print(map[i][j]+"* ");
-					else if (map[i][j] == BALL) System.out.print(map[i][j]+"＠ ");
-					else if (map[i][j] == WALL) System.out.print(map[i][j]+"| ");
-					else if (map[i][j] == GOAL) System.out.print(map[i][j]+"＃ ");
+					if (map[i][j] == PLAYER) System.out.print("* ");
+					else if (map[i][j] == BALL) System.out.print("＠ ");
+					else if (map[i][j] == WALL) System.out.print("| ");
+					else if (map[i][j] == GOAL) System.out.print("＃ ");
+					else System.out.print("0 ");
 					
 				}
 				System.out.println("");
 			}
+			if (ballY == goalY && ballX == goalX) {System.out.println("게임종료");break;}
 			System.out.println("==================");
+			System.out.println("상(1), 하(2), 좌(3), 우(4) : ");
+			int input = scan.nextInt();
+			
+			int yy = pY;
+			int xx = pX;
+			
+			if (input == 1) yy--;
+			else if (input ==2) yy++;
+			else if (input ==3) xx--;
+			else if (input ==4) xx++;
+			
+			if (yy < 0 || yy > SIZE || xx > SIZE || xx < 0) continue;
+			if (map[yy][xx]== WALL || map[yy][xx]== GOAL) continue;
+			
+			
+			
+			if (map[yy][xx]== BALL) {
+				int yyy = yy;
+				int xxx = xx;
+				
+				if (input == 1) yyy--;
+				else if (input ==2) yyy++;
+				else if (input ==3) xxx--;
+				else if (input ==4) xxx++;
+				
+				if (yyy < 0 || yyy > SIZE || xxx > SIZE || xxx < 0) continue;
+				if (map[yyy][xxx]== WALL ) continue;
+				
+				ballY = yyy;
+				ballX = xxx;
+				
+				map[ballY][ballX] = BALL;
+				
+			}
+			map[pY][pX] = 0;
+			pY = yy;
+			pX = xx;
+			map[pY][pX] = PLAYER;
+			
+			
+			
 			
 			
 		}

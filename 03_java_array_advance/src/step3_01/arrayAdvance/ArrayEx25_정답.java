@@ -32,7 +32,9 @@ public class ArrayEx25_정답 {
 
 		while(true) {
 			int check = 0;
-			for (int i = 0; i < arr.length; i++) if (arr[i] != 0) check++;
+			for (int i = 0; i < arr.length; i++) {
+				if (arr[i] != 0) check++;
+			}
 			if (check == 0) {
 				System.out.println("종료");
 				break;

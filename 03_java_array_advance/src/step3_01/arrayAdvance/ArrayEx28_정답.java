@@ -20,7 +20,9 @@ public class ArrayEx28_정답 {
 		int[] arr = new int[5];
 		
 		Boolean[] check = new Boolean[10];
-		for (int i = 0; i < check.length; i++) {check[i] = false;}
+		for (int i = 0; i < check.length; i++) {
+			check[i] = false;
+		}
 		
 		int cnt = 0 ;
 		

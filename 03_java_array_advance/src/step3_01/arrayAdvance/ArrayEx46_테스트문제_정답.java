@@ -19,10 +19,29 @@ public class ArrayEx46_테스트문제_정답 {
 		Boolean[] check1 = new Boolean[5];
 		Boolean[] check2 = new Boolean[5];
 		
-		for (int i = 0 ; i < 5 ; i++) {
+		int[] arr = new int[10];
+		
+		for (int i = 0 ; i < check1.length ; i++) {
 			check1[i] = false;
 			check2[i] = false;
 		}
+		int i  = 0;
+		while (i < 10) {
+			int ranNum = ran.nextInt(5);
+			if (check1[ranNum] == false) {
+				arr[i] = ranNum+1;
+				check1[ranNum] = true;
+				i++;
+			}
+			else if (check2[ranNum] == false) {
+				arr[i] = ranNum+1;
+				check2[ranNum] = true;
+				i++;
+			}
+		}
+		
+		System.out.print(Arrays.toString(arr));
+		
 		
 	}
 
