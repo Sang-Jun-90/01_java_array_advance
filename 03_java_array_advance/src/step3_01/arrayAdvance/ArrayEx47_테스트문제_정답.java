@@ -1,5 +1,8 @@
 package step3_01.arrayAdvance;
 
+import java.util.Arrays;
+import java.util.Scanner;
+
 /*
 문제1) 숫자 0이 플레이어이다. 
 	    
@@ -22,6 +25,8 @@ public class ArrayEx47_테스트문제_정답 {
 
 	public static void main(String[] args) {
 		
+		Scanner scan = new Scanner(System.in);
+		
 		int game[][] = {
 					{1,2,3,4},
 					{5,6,7,8},
@@ -30,6 +35,69 @@ public class ArrayEx47_테스트문제_정답 {
 				};
 		
 		int yx [][] = new int[10000][2];
+		
+		int y = 3;
+		int x = 3;
+		
+		int count = 0;
+		
+		while (true) {
+			
+			for (int i = 0; i < 4; i++) {
+				System.out.println(Arrays.toString(game[i]));
+			}
+			
+			System.out.print("??");
+			int sel = scan.nextInt();
+			
+			int yy = y;
+			int xx = x;
+			
+			if (sel == 1) {
+				if (xx-1 < 0) continue;
+				int temp = game[yy][xx-1];
+				game[yy][xx-1] = 0;
+				game[yy][xx] = temp;
+				yx[count][0] = y;
+				yx[count][1] = x;
+				count++;
+				x--;
+			}
+			else if (sel == 2) {
+				if (xx+1 > 3) continue;
+				int temp = game[yy][xx+1];
+				game[yy][xx+1] = 0;
+				game[yy][xx] = temp;
+				yx[count][0] = y;
+				yx[count][1] = x;
+				count++;
+				x++;
+			}
+			else if (sel == 3) {
+				if (yy-1 < 0) continue;
+				int temp = game[yy-1][xx];
+				game[yy-1][xx] = 0;
+				game[yy][xx] = temp;
+				yx[count][0] = y;
+				yx[count][1] = x;
+				count++;
+				y--;
+			}
+			else if (sel == 4) {
+				if (yy+1 > 3) continue;
+				int temp = game[yy+1][xx];
+				game[yy+1][xx] = 0;
+				game[yy][xx] = temp;
+				yx[count][0] = y;
+				yx[count][1] = x;
+				count++;
+				y++;
+			}
+			else if (sel == 5) {
+				
+			}
+			
+		}
 
 	}
 

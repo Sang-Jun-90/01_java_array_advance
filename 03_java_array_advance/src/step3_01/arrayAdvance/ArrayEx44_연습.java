@@ -1,5 +1,6 @@
 package step3_01.arrayAdvance;
 
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -19,28 +20,37 @@ public class ArrayEx44_연습 {
 		int size = 50;	
 		int win = 0;
 		
-		// 중복을 제거한 랜덤숫자를 임시 저장
-		for (int i=0; i<temp.length; i++) {
-			temp[i] = ran.nextInt(size) + 1;
-			for (int j=0; j<i; j++) {
-				if (temp[i] == temp[j]) {
-					i--;
-				}
+		// 
+		int n = 0;
+		
+		for (int j = 0; j < temp.length; j++) {
+			int ranNum = ran.nextInt(50)+1;
+			int check = -1;
+			for (int k = 0; k < temp.length; k++) {
+				if (ranNum == temp[k]) check = 0;
 			}
+			if (check == -1) {
+				temp[n] = ranNum;
+				check = -1;
+				n++;
+			}
+			else {
+				j--;
+			}
+			
 		}
 		
-		// 중복을 제거한 랜덤숫자를 빙고판에 대입
-		int k = 0;
-		for (int i=0; i<maxNum; i++) {
-			for (int j=0; j<maxNum; j++) {
-				bingo[i][j] = temp[k];
-				k++;
+		int num = 0;
+		for (int j = 0; j < maxNum; j++) {
+			for (int j2 = 0; j2 < maxNum; j2++) {
+				bingo[j][j2] = temp[num];
+				num++;
 			}
 		}
-		
-		
-		
+
+
 		while (true) {
+			
 			System.out.println("=============== BINGO GAME ===============");
 			System.out.print("\t");
 			for (int i=0; i<maxNum; i++) {
@@ -59,71 +69,58 @@ public class ArrayEx44_연습 {
 				}
 				System.out.println("\n");
 			}
-
-			if (win == 1) {
-				System.out.println("게임종료");
+			System.out.print("Y : ");
+			int inputY = scan.nextInt();
+			System.out.print("X : ");
+			int inputX = scan.nextInt();
+			
+			if (inputY > 4 || inputY < 0 || inputX > 4 || inputX < 0 ) continue;
+			
+			mark[inputY][inputX] = 1;
+			
+			int horSum = 0;
+			for (int i = 0; i < 5; i++) {
+				horSum += mark[inputY][i];
+			}
+			System.out.println(horSum);
+			if (horSum == 5) {
+				System.out.println("win");
 				break;
 			}
 			
-			System.out.print("y좌표 입력 : ");
-			int meY = scan.nextInt();
-			System.out.print("x좌표 입력 : ");
-			int meX = scan.nextInt();
-			
-			if (mark[meY][meX] == 0) {
-				mark[meY][meX] = 1;
+			int verSum = 0;
+			for (int i = 0; i < 5; i++) {
+				verSum += mark[i][inputX];
+			}
+			System.out.println(verSum);
+			if (verSum == 5) {
+				System.out.println("win");
+				break;
 			}
 			
-			// 가로검사
-			for (int i=0; i<maxNum; i++) {
-				int cnt = 0;
-				for (int j=0; j<maxNum; j++) {
-					if (mark[i][j] == 1) {
-						cnt++;
-					}
-				}
-				if (cnt == 5) {
-					win = 1;
-					break;
-				}
+			int x = 0;
+			
+			for (int i = 0; i < 5; i++) {
+				x+= mark[i][i];
 			}
 			
-			// 세로검사
-			for (int j=0; j<maxNum; j++) {
-				int cnt = 0;
-				for (int i=0; i<maxNum; i++) {
-					if (mark[i][j] == 1) {
-						cnt++;
-					}
-				}
-				if (cnt == 5) {
-					win = 1;
-					break;
-				}
+			if (x == 5) {
+				System.out.println("win");
+				break;
 			}
 			
-			// 대각선 검사
-			int cnt = 0;
-			for (int i=0; i<maxNum; i++) {
-				if (mark[i][i] == 1) {
-					cnt++;
-				}
-			}
-			if (cnt == 5) {
-				win = 1;
+			int xx = 0;
+			
+			for (int i = 0; i < 5; i++) {
+				x+= mark[i][4-i];
 			}
 			
-			cnt = 0;
-			for (int i=0; i<maxNum; i++) {
-				if (mark[i][(maxNum-1)-i] == 1) {
-					cnt++;
-				}
+			if (xx == 5) {
+				System.out.println("win");
+				break;
 			}
-			if (cnt == 5) {
-				win = 1;
-			}
-			
 		}
+		
 
 		scan.close();
 	}
