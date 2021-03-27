@@ -29,39 +29,76 @@ public class ArrayEx50_정답 {
 		
 		int num = 1;
 		int der = 1; // 1 > 오른쪽 / 2 > 아래  / 3 > 왼쪽 / 4 > 위
-		int hor = 0;
-		int ver = 0;
+		int 횡 =  0; // 0
+		int 열 =  0; // 1
 
-//		for (int i = 0; i < map.length; i++) {
-//			System.out.println(Arrays.toString(map[i]));
-//		}
+
 		
 		while (num < 26) {
 			if (der == 1) {
-				for (int i = 0; i <= 5; i++) {
-					if (map[hor][i] == 0) {
-						map[hor][i] = num;
+				for (int i = 0; i < 5; i++) {
+					if (map[횡][i] == 0) {
+						map[횡][i] = num;
 						num++;
-						ver++;
+						횡++;
 					}
-					else if (map[hor][i] != 0) {
+					else if (map[횡][i] != 0) {
 						der = 2;
-						hor = 1;
+						열++;
 						continue;
 					}
 				}
+				횡--;
 			}
 			else if (der == 2) {
-				
+				for (int i = 열; i < 5; i++) {
+					if (map[i][횡] == 0) {
+						map[i][횡] = num;
+						num++;
+						열++;
+					}
+					else if (map[i][횡] != 0) {
+						der = 3;
+						횡--;
+						continue;
+					}
+				}
+				열--;
 			}
 			else if (der == 3) {
-				
+				for (int i = 횡; i >= 0; i--) {
+					if (map[열][i] == 0) {
+						map[열][i] = num;
+						num++;
+						횡--;
+					}
+					else if (map[열][i] != 0) {
+						der = 4;
+						횡++;
+						continue;
+					}
+				}
+				열--;
 			}
 			else if (der == 4) {
-				
+				for (int i = 열; i >= 0; i--) {
+					if (map[횡][i] == 0) {
+						map[횡][i] = num;
+						num++;
+						열--;
+					}
+					else if (map[횡][i] != 0) {
+						der = 1;
+						횡++;
+						continue;
+					}
+				}
+				열++;
 			}
 		}
-		
+		for (int i = 0; i < map.length; i++) {
+		System.out.println(Arrays.toString(map[i]));
+	}
 		
 	}
 

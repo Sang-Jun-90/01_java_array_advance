@@ -67,6 +67,8 @@ public class ArrayEx49_정답 {
 	    	
 	    	player += num;
 	    	player %= 16;
+	    	
+
 	    
 	    	
 	    }
