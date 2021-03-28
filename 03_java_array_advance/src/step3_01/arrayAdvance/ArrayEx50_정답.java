@@ -29,73 +29,60 @@ public class ArrayEx50_정답 {
 		
 		int num = 1;
 		int der = 1; // 1 > 오른쪽 / 2 > 아래  / 3 > 왼쪽 / 4 > 위
-		int 횡 =  0; // 0
-		int 열 =  0; // 1
+		int line =  0; // 1
+		int lineCount =  0; // 0
+		int k = 5;  // 3
 
 
 		
 		while (num < 26) {
 			if (der == 1) {
-				for (int i = 0; i < 5; i++) {
-					if (map[횡][i] == 0) {
-						map[횡][i] = num;
-						num++;
-						횡++;
-					}
-					else if (map[횡][i] != 0) {
-						der = 2;
-						열++;
-						continue;
-					}
+				for (int i = 0; i < k; i++) {
+					map[line][lineCount] = num;
+					num++;
+					lineCount++;
 				}
-				횡--;
+				lineCount--;
+				line++;
+				k--;
+				der = 2;
 			}
 			else if (der == 2) {
-				for (int i = 열; i < 5; i++) {
-					if (map[i][횡] == 0) {
-						map[i][횡] = num;
-						num++;
-						열++;
-					}
-					else if (map[i][횡] != 0) {
-						der = 3;
-						횡--;
-						continue;
-					}
+				for (int i = 0; i < k; i++) {
+					map[line][lineCount] = num;
+					num++;
+					line++;
 				}
-				열--;
+				line--;
+				lineCount--;
+				der = 3;
+				
 			}
 			else if (der == 3) {
-				for (int i = 횡; i >= 0; i--) {
-					if (map[열][i] == 0) {
-						map[열][i] = num;
-						num++;
-						횡--;
-					}
-					else if (map[열][i] != 0) {
-						der = 4;
-						횡++;
-						continue;
-					}
+				
+				for (int i = 0; i < k; i++) {
+					map[line][lineCount] = num;
+					num++;
+					lineCount--;
 				}
-				열--;
+				lineCount++;
+				line--;
+				k--;
+				der = 4;
 			}
 			else if (der == 4) {
-				for (int i = 열; i >= 0; i--) {
-					if (map[횡][i] == 0) {
-						map[횡][i] = num;
-						num++;
-						열--;
-					}
-					else if (map[횡][i] != 0) {
-						der = 1;
-						횡++;
-						continue;
-					}
+				for (int i = 0; i < k; i++) {
+					map[line][lineCount] = num;
+					num++;
+					line--;
 				}
-				열++;
+				line++;
+				lineCount++;
+				
+				der = 1;
 			}
 		}
+		
 		for (int i = 0; i < map.length; i++) {
 		System.out.println(Arrays.toString(map[i]));
 	}
